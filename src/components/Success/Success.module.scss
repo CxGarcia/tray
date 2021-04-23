@@ -1,0 +1,12 @@
+@import 'styles/main.scss';
+
+.formTitle {
+  @include form-title;
+}
+
+.json {
+  color: $font-color;
+  font-weight: 500;
+  line-height: 2rem;
+  font-size: 1.25rem;
+}
