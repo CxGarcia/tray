@@ -7,8 +7,17 @@ export const formStepMachine = Machine({
   //initial context (extended state) of the machine
   //this are the values received when the form is submitted
   context: {
-    user: {},
-    privacy: {},
+    user: {
+      name: '',
+      role: '',
+      email: '',
+      password: '',
+    },
+    privacy: {
+      trayUpdates: false,
+      otherUpdates: false,
+    },
+    success: {},
   },
   //the initial state (step) of our form
   initial: 'user',
@@ -35,6 +44,9 @@ export const formStepMachine = Machine({
           target: 'loading',
           actions: assign({ privacy: (_, event) => event.payload }),
         },
+        BACK: {
+          target: 'user',
+        },
       },
     },
     loading: {
@@ -46,7 +58,10 @@ export const formStepMachine = Machine({
         src: (ctx) => submit(ctx),
         //if the promise resolves, we go into the success state
         //at this point we can dispatch a redux action and update our global state
-        onDone: 'success',
+        onDone: {
+          target: 'success',
+          actions: assign({ success: (_, event) => event.data }),
+        },
         //if the promise rejects, we go into the failure state
         //from this state the only viable option is to retry submitting the form
         onError: 'failure',

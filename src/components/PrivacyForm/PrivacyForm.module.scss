@@ -1,0 +1,33 @@
+@import 'styles/main.scss';
+
+.form {
+  @include flex(column);
+  height: 100%;
+  width: 100%;
+
+  > * {
+    margin: 1rem 0;
+  }
+
+  div {
+    @include flex(row, center, flex-start);
+    width: 50%;
+    input {
+      margin: 0 0.5rem;
+    }
+  }
+
+  .buttonContainer {
+    @include flex(row);
+    width: 50%;
+
+    button {
+      @include form-button;
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+.formTitle {
+  @include form-title;
+}

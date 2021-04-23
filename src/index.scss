@@ -30,7 +30,11 @@ h3 {
   font-weight: 500;
 }
 
-p {
+p,
+button,
+label,
+input,
+pre {
   font-family: 'Assistant', sans-serif;
   font-size: $base-size;
   font-weight: 300;

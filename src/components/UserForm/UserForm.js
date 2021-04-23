@@ -10,9 +10,11 @@ const invalidText = {
     'Your password has to be 9 chars long and include at least one uppercase letter, one lowercase letter, and one number',
 };
 
-function UserForm({ send }) {
-  const [userInfo, setUserInfo] = useState({});
+function UserForm({ send, initialState }) {
+  const [userInfo, setUserInfo] = useState(initialState);
   const [invalid, setInvalid] = useState([]);
+
+  const { name, role, email, password } = userInfo;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -46,39 +48,48 @@ function UserForm({ send }) {
 
   return (
     <>
-      <h1>Create your account</h1>
       <form
         className={styles.form}
         onSubmit={handleSubmit}
         onChange={handleChange}
         onInvalid={handleInvalid}
       >
-        <label htmlFor="name">
-          Name
-          <input required id="name" type="text" name="name" />
-        </label>
+        <h1 className={styles.formTitle}>Create your account</h1>
+        <div>
+          <label htmlFor="name">Name</label>
+          <input required id="name" type="text" name="name" value={name} />
+        </div>
 
-        <label htmlFor="role">
-          Role
-          <input id="role" type="text" name="role" />
-        </label>
+        <div>
+          <label htmlFor="role">Role</label>
+          <input id="role" type="text" name="role" value={role} />
+        </div>
 
-        <label htmlFor="email">
-          Email
-          <input required id="email" type="email" name="email" />
-        </label>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input required id="email" type="email" name="email" value={email} />
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          required
-          id="password"
-          type="password"
-          name="password"
-          pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
-        />
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            required
+            id="password"
+            type="password"
+            name="password"
+            value={password}
+            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
+          />
+        </div>
+
         <button type="submit">Submit</button>
       </form>
-      {renderInvalid()}
+      {invalid.length > 0 && (
+        <div className={styles.invalidContainer}>
+          <h2>Error</h2>
+          {renderInvalid()}
+        </div>
+      )}
     </>
   );
 }
