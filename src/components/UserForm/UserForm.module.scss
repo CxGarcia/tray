@@ -6,7 +6,27 @@
   align-items: center;
   justify-content: center;
 
+  height: 80%;
+
+  background: $bg;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px $highlights-light;
+
   & input {
     align-self: flex-end;
+
+    width: 380px;
+    height: 20px;
+    padding: 8px 12px;
+
+    border-radius: 5px;
+    border: 1px solid $highlights-light;
+    outline: none;
+
+    transition: all 0.25s ease-in;
+
+    &:focus {
+      box-shadow: 0px 0px 0px 1pt $hightlights;
+    }
   }
 }
