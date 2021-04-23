@@ -1,4 +1,5 @@
 import { Machine, assign } from 'xstate';
+import { submit } from 'api/mock-api';
 
 export const formStepMachine = Machine({
   id: 'formStepMachine',
@@ -6,7 +7,7 @@ export const formStepMachine = Machine({
   context: {
     user: {
       name: '',
-      organization: '',
+      role: '',
       email: '',
       password: '',
     },
@@ -25,7 +26,7 @@ export const formStepMachine = Machine({
             user: (ctx, event) => {
               //when the form is submitted, it has already been validated
               //thus we can overwrite whatever we have in our initial ctx
-              return { ...ctx.privacy, ...event.payload };
+              return { ...ctx.user, ...event.payload };
             },
           }),
         },
@@ -44,8 +45,10 @@ export const formStepMachine = Machine({
       },
     },
     loading: {
+      //submit the form via the api service
       invoke: {
-        id: 'submitting',
+        id: 'submit-form',
+        src: (ctx) => submit(ctx),
         onDone: 'success',
         onError: 'failure',
       },
@@ -56,6 +59,7 @@ export const formStepMachine = Machine({
       },
     },
     success: {
+      //TODO - on success, dispatch redux action
       type: 'final',
     },
   },
