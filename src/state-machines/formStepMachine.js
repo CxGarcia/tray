@@ -7,16 +7,8 @@ export const formStepMachine = Machine({
   //initial context (extended state) of the machine
   //this are the values received when the form is submitted
   context: {
-    user: {
-      name: '',
-      role: '',
-      email: '',
-      password: '',
-    },
-    privacy: {
-      trayUpdates: false,
-      otherUpdates: false,
-    },
+    user: {},
+    privacy: {},
   },
   //the initial state (step) of our form
   initial: 'user',
@@ -31,11 +23,9 @@ export const formStepMachine = Machine({
       on: {
         SUBMIT: {
           target: 'privacy',
-          actions: assign({
-            //when the form is submitted, it has already been validated
-            //thus we can overwrite whatever we have in our initial ctx
-            user: (_, event) => event.payload,
-          }),
+          //when the form is submitted, it has already been validated
+          //thus we can overwrite whatever we have in our initial ctx
+          actions: assign({ user: (_, event) => event.payload }),
         },
       },
     },
@@ -43,9 +33,7 @@ export const formStepMachine = Machine({
       on: {
         SUBMIT: {
           target: 'loading',
-          actions: assign({
-            privacy: (_, event) => event.payload,
-          }),
+          actions: assign({ privacy: (_, event) => event.payload }),
         },
       },
     },
