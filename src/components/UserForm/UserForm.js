@@ -84,7 +84,12 @@ function UserForm({ send, initialState }) {
 
         <button type="submit">Submit</button>
       </form>
-      {renderInvalid()}
+      {invalid.length > 0 && (
+        <div className={styles.invalidContainer}>
+          <h2>Error</h2>
+          {renderInvalid()}
+        </div>
+      )}
     </>
   );
 }

@@ -39,3 +39,43 @@
 .formTitle {
   @include form-title;
 }
+
+.invalidContainer {
+  position: absolute;
+  right: 25px;
+
+  padding: 1rem;
+  width: 20%;
+
+  border: 1px solid rgb(255, 150, 110);
+  border-radius: 10px;
+
+  animation: grow 0.5s;
+
+  h2 {
+    width: 100%;
+
+    color: $font-color;
+    text-align: center;
+    border-bottom: 1px solid $highlights-light;
+  }
+
+  p {
+    margin: 1.5rem 0;
+    width: 100%;
+
+    color: $font-color;
+    font-weight: 400;
+    line-height: 1.25rem;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

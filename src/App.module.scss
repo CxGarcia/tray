@@ -3,8 +3,8 @@
 .container {
   @include minmax(100vh, 100vw);
   display: grid;
-  grid-template-rows: 1fr 5fr 1fr;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-columns: 2fr 6fr 2fr;
   grid-template-areas: '. step .' '. form .';
 
   padding: 1rem;
