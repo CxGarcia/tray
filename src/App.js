@@ -1,14 +1,14 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 
-import Success from 'components/Success/Success';
-import Loading from 'components/Loading/Loading';
-import Failure from 'components/Failure/Failure';
 import UserForm from 'components/UserForm/UserForm';
 import PrivacyForm from 'components/PrivacyForm/PrivacyForm';
+import Loading from 'components/Loading/Loading';
+import Success from 'components/Success/Success';
+import Failure from 'components/Failure/Failure';
 
 import { formStepMachine } from 'state-machines/formStepMachine';
-import './App.module.scss';
+import styles from './App.module.scss';
 
 const steps = {
   user: UserForm,
@@ -33,7 +33,12 @@ function App() {
     });
   }
 
-  return <div>{stepFactory()}</div>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.step}>{value}</div>
+      <div className={styles.form}>{stepFactory()}</div>
+    </div>
+  );
 }
 
 export default App;

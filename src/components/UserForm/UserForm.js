@@ -45,19 +45,36 @@ function UserForm({ send }) {
   return (
     <>
       <form
+        className={styles.form}
         onSubmit={handleSubmit}
         onChange={handleChange}
         onInvalid={handleInvalid}
       >
-        <input type="text" name="name" required />
-        <input type="text" name="role" />
-        <input type="email" name="email" required />
-        <input
-          required
-          type="password"
-          name="password"
-          pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.{9,})"
-        />
+        <label htmlFor="name">
+          Name
+          <input required id="name" type="text" name="name" />
+        </label>
+
+        <label htmlFor="role">
+          Role
+          <input id="role" type="text" name="role" />
+        </label>
+
+        <label htmlFor="email">
+          Email
+          <input required id="email" type="email" name="email" />
+        </label>
+
+        <label htmlFor="password">
+          Password
+          <input
+            required
+            id="password"
+            type="password"
+            name="password"
+            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.{9,})"
+          />
+        </label>
         <button type="submit">Submit</button>
       </form>
       {renderInvalid()}

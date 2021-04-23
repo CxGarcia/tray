@@ -1,0 +1,12 @@
+@import 'styles/main.scss';
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  & input {
+    align-self: flex-end;
+  }
+}
