@@ -32,11 +32,9 @@ export const formStepMachine = Machine({
         SUBMIT: {
           target: 'privacy',
           actions: assign({
-            user: (ctx, event) => {
-              //when the form is submitted, it has already been validated
-              //thus we can overwrite whatever we have in our initial ctx
-              return { ...ctx.user, ...event.payload };
-            },
+            //when the form is submitted, it has already been validated
+            //thus we can overwrite whatever we have in our initial ctx
+            user: (_, event) => event.payload,
           }),
         },
       },
@@ -46,9 +44,7 @@ export const formStepMachine = Machine({
         SUBMIT: {
           target: 'loading',
           actions: assign({
-            privacy: (ctx, event) => {
-              return { ...ctx.privacy, ...event.payload };
-            },
+            privacy: (_, event) => event.payload,
           }),
         },
       },
