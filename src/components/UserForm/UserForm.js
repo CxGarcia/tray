@@ -33,6 +33,8 @@ function UserForm({ send }) {
   function handleInvalid(event) {
     const { name } = event.target;
 
+    if (invalid.includes(name)) return;
+
     setInvalid(() => [...invalid, name]);
   }
 
@@ -44,6 +46,7 @@ function UserForm({ send }) {
 
   return (
     <>
+      <h1>Create your account</h1>
       <form
         className={styles.form}
         onSubmit={handleSubmit}
@@ -65,16 +68,14 @@ function UserForm({ send }) {
           <input required id="email" type="email" name="email" />
         </label>
 
-        <label htmlFor="password">
-          Password
-          <input
-            required
-            id="password"
-            type="password"
-            name="password"
-            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.{9,})"
-          />
-        </label>
+        <label htmlFor="password">Password</label>
+        <input
+          required
+          id="password"
+          type="password"
+          name="password"
+          pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
+        />
         <button type="submit">Submit</button>
       </form>
       {renderInvalid()}
