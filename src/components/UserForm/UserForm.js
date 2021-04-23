@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
+import { debounce } from 'utils';
 import styles from './UserForm.module.scss';
 
 function UserForm({ send }) {
   const [userInfo, setUserInfo] = useState({});
 
-  function handleChange(event) {
+  //debounced handleChange as to not trigger constant rerenders from state changes when user is inputting values
+  const handleChange = debounce(function handleChange(event) {
     const { name, value } = event.target;
     setUserInfo({ ...userInfo, [name]: value });
-  }
+  }, 500);
 
   function handleSubmit(event) {
     event.preventDefault();
