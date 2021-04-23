@@ -1,14 +1,21 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
-import { formStepMachine } from 'state-machines/formStepMachine';
+
+import Success from 'components/Success/Success';
+import Loading from 'components/Loading/Loading';
+import Failure from 'components/Failure/Failure';
 import UserForm from 'components/UserForm/UserForm';
 import PrivacyForm from 'components/PrivacyForm/PrivacyForm';
 
+import { formStepMachine } from 'state-machines/formStepMachine';
 import './App.module.scss';
 
 const steps = {
   user: UserForm,
   privacy: PrivacyForm,
+  loading: Loading,
+  success: Success,
+  failure: Failure,
 };
 
 function App() {
