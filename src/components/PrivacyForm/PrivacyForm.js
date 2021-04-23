@@ -17,27 +17,41 @@ function PrivacyForm({ send, initialState }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} onChange={handleChange}>
-      <label htmlFor="trayUpdates">
-        Receive updates about Tray.io product by email
-      </label>
-      <input
-        type="checkbox"
-        id="trayUpdates"
-        name="trayUpdates"
-        defaultChecked={trayUpdates}
-      />
-      <label htmlFor="otherUpdates">
-        Receive emails for other products created by the Tray.io team
-      </label>
-      <input
-        type="checkbox"
-        id="otherUpdates"
-        name="otherUpdates"
-        defaultChecked={otherUpdates}
-      />
-      <button onClick={() => send('BACK')}>Go Back</button>
-      <button type="submit">Submit</button>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+    >
+      <h1 className={styles.formTitle}>Hear from us</h1>
+
+      <div>
+        <input
+          type="checkbox"
+          id="trayUpdates"
+          name="trayUpdates"
+          defaultChecked={trayUpdates}
+        />
+        <label htmlFor="trayUpdates">
+          Receive updates about Tray.io product by email
+        </label>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          id="otherUpdates"
+          name="otherUpdates"
+          defaultChecked={otherUpdates}
+        />
+        <label htmlFor="otherUpdates">
+          Receive emails for other products created by the Tray.io team
+        </label>
+      </div>
+
+      <div className={styles.buttonContainer}>
+        <button onClick={() => send('BACK')}>Go Back</button>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   );
 }

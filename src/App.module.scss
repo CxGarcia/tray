@@ -3,22 +3,25 @@
 .container {
   @include minmax(100vh, 100vw);
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 5fr 1fr;
   grid-template-columns: 2fr 4fr 2fr;
   grid-template-areas: '. step .' '. form .';
 
   padding: 1rem;
-  border: 1px solid red;
 }
 
 .step {
   @include minmax;
   grid-area: step;
-  border: 1px solid red;
 }
 
 .form {
   @include minmax;
+  @include flex(column);
   grid-area: form;
-  border: 1px solid blue;
+
+  position: relative;
+
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px $highlights-light;
 }

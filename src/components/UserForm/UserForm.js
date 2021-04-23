@@ -48,37 +48,40 @@ function UserForm({ send, initialState }) {
 
   return (
     <>
-      <h1>Create your account</h1>
       <form
         className={styles.form}
         onSubmit={handleSubmit}
         onChange={handleChange}
         onInvalid={handleInvalid}
       >
-        <label htmlFor="name">
-          Name
+        <h1 className={styles.formTitle}>Create your account</h1>
+        <div>
+          <label htmlFor="name">Name</label>
           <input required id="name" type="text" name="name" value={name} />
-        </label>
+        </div>
 
-        <label htmlFor="role">
-          Role
+        <div>
+          <label htmlFor="role">Role</label>
           <input id="role" type="text" name="role" value={role} />
-        </label>
+        </div>
 
-        <label htmlFor="email">
-          Email
+        <div>
+          <label htmlFor="email">Email</label>
           <input required id="email" type="email" name="email" value={email} />
-        </label>
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          required
-          id="password"
-          type="password"
-          name="password"
-          value={password}
-          pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
-        />
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            required
+            id="password"
+            type="password"
+            name="password"
+            value={password}
+            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
+          />
+        </div>
+
         <button type="submit">Submit</button>
       </form>
       {renderInvalid()}
