@@ -8,7 +8,10 @@ export const formStepMachine = Machine({
   //this are the values received when the form is submitted
   context: {
     user: {},
-    privacy: {},
+    privacy: {
+      trayUpdates: false,
+      otherUpdates: false,
+    },
   },
   //the initial state (step) of our form
   initial: 'user',
@@ -34,6 +37,9 @@ export const formStepMachine = Machine({
         SUBMIT: {
           target: 'loading',
           actions: assign({ privacy: (_, event) => event.payload }),
+        },
+        BACK: {
+          target: 'user',
         },
       },
     },

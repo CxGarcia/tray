@@ -30,6 +30,7 @@ function App() {
   function stepFactory() {
     return React.createElement(steps[value], {
       send,
+      initialState: state.context[value],
     });
   }
 

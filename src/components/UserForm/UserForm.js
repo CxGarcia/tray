@@ -10,9 +10,11 @@ const invalidText = {
     'Your password has to be 9 chars long and include at least one uppercase letter, one lowercase letter, and one number',
 };
 
-function UserForm({ send }) {
-  const [userInfo, setUserInfo] = useState({});
+function UserForm({ send, initialState }) {
+  const [userInfo, setUserInfo] = useState(initialState);
   const [invalid, setInvalid] = useState([]);
+
+  const { name, role, email, password } = userInfo;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -55,17 +57,17 @@ function UserForm({ send }) {
       >
         <label htmlFor="name">
           Name
-          <input required id="name" type="text" name="name" />
+          <input required id="name" type="text" name="name" value={name} />
         </label>
 
         <label htmlFor="role">
           Role
-          <input id="role" type="text" name="role" />
+          <input id="role" type="text" name="role" value={role} />
         </label>
 
         <label htmlFor="email">
           Email
-          <input required id="email" type="email" name="email" />
+          <input required id="email" type="email" name="email" value={email} />
         </label>
 
         <label htmlFor="password">Password</label>
@@ -74,6 +76,7 @@ function UserForm({ send }) {
           id="password"
           type="password"
           name="password"
+          value={password}
           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{9,}"
         />
         <button type="submit">Submit</button>
