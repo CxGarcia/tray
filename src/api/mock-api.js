@@ -10,6 +10,6 @@ export function submit(values) {
     setTimeout(() => {
       const num = Math.random();
       return num > 0.4 ? resolve(values) : reject();
-    });
-  }, 1000);
+    }, 1500);
+  });
 }

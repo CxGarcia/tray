@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 
+import FormStep from 'components/FormStep/FormStep';
 import UserForm from 'components/UserForm/UserForm';
 import PrivacyForm from 'components/PrivacyForm/PrivacyForm';
 import Loading from 'components/Loading/Loading';
@@ -36,7 +37,9 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.step}>{value}</div>
+      <div className={styles.step}>
+        <FormStep steps={state} value={value} />
+      </div>
       <div className={styles.form}>{stepFactory()}</div>
     </div>
   );

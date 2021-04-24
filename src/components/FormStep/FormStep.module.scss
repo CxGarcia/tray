@@ -1,0 +1,21 @@
+@import 'styles/main';
+
+.step {
+  @include minmax(40px, 150px);
+  @include flex(row);
+
+  color: $secondary-font-color;
+  background: #a6a6a6;
+}
+
+.activeStep {
+  background: $hightlights;
+}
+
+.failure {
+  background: rgb(255, 94, 30);
+}
+
+.success {
+  background: rgb(33, 156, 33);
+}
