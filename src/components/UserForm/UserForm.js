@@ -29,7 +29,10 @@ function UserForm({ send, initialState }) {
       return { ...userInfo, [name]: value };
     });
 
-    if (invalid.length > 0) setInvalid([]);
+    if (invalid.length > 0) {
+      const _invalid = invalid.filter((el) => el !== name);
+      setInvalid(_invalid);
+    }
   }
 
   function handleInvalid(event) {
