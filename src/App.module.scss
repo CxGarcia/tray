@@ -12,7 +12,22 @@
 
 .step {
   @include minmax;
+  @include flex(row);
   grid-area: step;
+
+  :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  :not(:last-child) {
+    border-right: 2px solid $bg;
+  }
 }
 
 .form {
