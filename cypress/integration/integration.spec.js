@@ -8,6 +8,24 @@ describe('Navigate to app', () => {
   });
 });
 
+describe('User form step', () => {
+  it('The user step has a blue background color', () => {
+    cy.get('h3')
+      .contains('user')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+  });
+
+  it('The remaining steps have a grey background color', () => {
+    cy.get('h3')
+      .contains('privacy')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+
+    cy.get('h3')
+      .contains('done')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+  });
+});
+
 describe('Invalid password (length below 9 chars)', () => {
   let user;
 
@@ -142,7 +160,7 @@ describe('No name entered', () => {
     cy.get('button[type=submit]').click();
   });
 
-  it('Shows an error because there is no email', () => {
+  it('Shows an error because there is no name', () => {
     cy.contains('Error');
     cy.contains('Your name is required');
   });
@@ -156,7 +174,7 @@ describe('Valid form submit', () => {
   let user;
 
   before(function () {
-    cy.task('validInputs').then((data) => {
+    cy.fixture('valid-user.json').then((data) => {
       user = data;
     });
   });
@@ -172,6 +190,109 @@ describe('Valid form submit', () => {
   });
 
   it('Should go to the next part of the form', () => {
+    cy.wait(500);
+
     cy.contains('Receive updates about Tray.io');
+  });
+});
+
+describe('Privacy form step', () => {
+  it('The privacy step and previous steps have a blue background color', () => {
+    cy.get('h3')
+      .contains('user')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+
+    cy.get('h3')
+      .contains('privacy')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+  });
+
+  it('The remaining steps have a grey background color', () => {
+    cy.get('h3')
+      .contains('done')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+  });
+
+  it('click on the updates', () => {
+    cy.get('#trayUpdates').click();
+    cy.get('#otherUpdates').click();
+  });
+});
+
+describe('Going back from privacy to user', () => {
+  let user;
+
+  before(function () {
+    cy.fixture('valid-user.json').then((data) => {
+      user = data;
+    });
+  });
+
+  it('Goes back to the previous step', () => {
+    cy.get('button').contains('Go Back').click();
+    cy.wait(500);
+
+    cy.contains('Create your account');
+  });
+
+  it('The user step has a blue background color', () => {
+    cy.get('h3')
+      .contains('user')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+  });
+
+  it('The remaining steps have a grey background color', () => {
+    cy.get('h3')
+      .contains('privacy')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+
+    cy.get('h3')
+      .contains('done')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+  });
+
+  it('The user values should be the same as the ones introduced before', () => {
+    cy.get('#name').should('have.value', user.name);
+    cy.get('#role').should('have.value', user.role);
+    cy.get('#email').should('have.value', user.email);
+    cy.get('#password').should('have.value', user.password);
+  });
+});
+
+describe('Back to privacy form step', () => {
+  it('Goes back to the privacy step', () => {
+    cy.get('button[type=submit]').click();
+    cy.wait(500);
+
+    cy.contains('Hear from us');
+  });
+
+  it('The privacy step and previous steps have a blue background color', () => {
+    cy.get('h3')
+      .contains('user')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+
+    cy.get('h3')
+      .contains('privacy')
+      .should('have.css', 'background-color', 'rgb(15, 102, 228)');
+  });
+
+  it('The remaining steps have a grey background color', () => {
+    cy.get('h3')
+      .contains('done')
+      .should('have.css', 'background-color', 'rgb(166, 166, 166)');
+  });
+
+  it('The boxes are still checked after going back to prev step and coming back', () => {
+    cy.get('#trayUpdates').should('have.attr', 'checked');
+    cy.get('#otherUpdates').should('have.attr', 'checked');
+  });
+});
+
+describe('Submit the final form', () => {
+  it('Submits the form and spinner should appear', () => {
+    cy.get('button[type=submit]').click();
+    cy.wait(100);
+    cy.get('#spinner');
   });
 });
