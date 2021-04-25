@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from './UserForm.module.scss';
 
-//TODO - change how this is displayed
+//message that will be displayed for every invalid field
 const invalidText = {
   name: 'Your name is required',
   email: 'Please enter a valid email',
@@ -10,8 +10,8 @@ const invalidText = {
     'Your password has to be 9 chars long and include at least one uppercase letter, one lowercase letter, and one number',
 };
 
-function UserForm({ send, initialState }) {
-  const [userInfo, setUserInfo] = useState(initialState);
+function UserForm({ send, context }) {
+  const [userInfo, setUserInfo] = useState(context);
   const [invalid, setInvalid] = useState([]);
 
   const { name, role, email, password } = userInfo;

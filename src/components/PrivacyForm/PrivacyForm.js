@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './PrivacyForm.module.scss';
 
-function PrivacyForm({ send, initialState }) {
-  const [userPreferences, setUserPreferences] = useState(initialState);
+function PrivacyForm({ send, context }) {
+  const [userPreferences, setUserPreferences] = useState(context);
 
   const { trayUpdates, otherUpdates } = userPreferences;
 
