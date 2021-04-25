@@ -11,6 +11,11 @@ function PrivacyForm({ send, context }) {
     send('SUBMIT', { payload: userPreferences });
   }
 
+  function handleBack(event) {
+    event.preventDefault();
+    send('BACK', { payload: userPreferences });
+  }
+
   function handleChange(event) {
     const { name } = event.target;
     setUserPreferences({ ...userPreferences, [name]: !userPreferences[name] });
@@ -49,7 +54,7 @@ function PrivacyForm({ send, context }) {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button onClick={() => send('BACK')}>Go Back</button>
+        <button onClick={handleBack}>Go Back</button>
         <button type="submit">Submit</button>
       </div>
     </form>

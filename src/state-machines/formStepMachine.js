@@ -46,6 +46,7 @@ export const formStepMachine = Machine({
         },
         BACK: {
           target: 'user',
+          actions: assign({ privacy: (_, event) => event.payload }),
         },
       },
     },
