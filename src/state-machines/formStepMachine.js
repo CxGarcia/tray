@@ -17,7 +17,6 @@ export const formStepMachine = Machine({
       trayUpdates: false,
       otherUpdates: false,
     },
-    success: {},
   },
   //the initial state (step) of our form
   initial: 'user',
@@ -61,6 +60,7 @@ export const formStepMachine = Machine({
         //at this point we can dispatch a redux action and update our global state
         onDone: {
           target: 'success',
+          //whatever is returned by our server, is saved into the success object
           actions: assign({ success: (_, event) => event.data }),
         },
         //if the promise rejects, we go into the failure state
