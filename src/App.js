@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 
-import FormStep from 'components/FormStep/FormStep';
+import FormSteps from 'components/FormSteps/FormSteps';
 import UserForm from 'components/UserForm/UserForm';
 import PrivacyForm from 'components/PrivacyForm/PrivacyForm';
 import Loading from 'components/Loading/Loading';
@@ -22,25 +22,21 @@ const steps = {
 function App() {
   const [state, send] = useMachine(formStepMachine);
 
-  //the value is the state where the machine is
+  //the value is the current state of the machine
   //in this case, the value is the current step of the form
-  const { value } = state;
+  const { value, context } = state;
 
-  //we can dynamically set the current step of the form with a factory component pattern
-  //this pattern also allows us to pass props to our components which is very convenient
-  function stepFactory() {
-    return React.createElement(steps[value], {
-      send,
-      initialState: state.context[value],
-    });
-  }
+  //we can dynamically set the form that will be rendered depending on the current state of the state machine
+  const CurrentStep = steps[value];
 
   return (
     <div className={styles.container}>
       <div className={styles.step}>
-        <FormStep steps={state} value={value} />
+        <FormSteps value={value} />
       </div>
-      <div className={styles.form}>{stepFactory()}</div>
+      <div className={styles.form}>
+        <CurrentStep send={send} context={context[value]} />
+      </div>
     </div>
   );
 }

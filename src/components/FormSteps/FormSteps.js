@@ -1,12 +1,15 @@
 import React from 'react';
-import styles from './FormStep.module.scss';
+import styles from './FormSteps.module.scss';
 
-function FormStep({ value }) {
+function FormSteps({ value }) {
   function renderSteps() {
     const steps = ['user', 'privacy'];
     const idxOfActiveStep = steps.indexOf(value);
 
     return steps.map((step, idx) => {
+      //to check if the step is or was active, we can check if the curr idx of the map is less than or equal
+      //to idxOfActiveStep OR if the value isn't contained within the array of steps since this means that our form
+      //is already in the done state
       const active = idx <= idxOfActiveStep || idxOfActiveStep === -1;
 
       return (
@@ -49,4 +52,4 @@ function FormStep({ value }) {
   );
 }
 
-export default FormStep;
+export default FormSteps;

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import styles from './PrivacyForm.module.scss';
 
-function PrivacyForm({ send, initialState }) {
-  const [userPreferences, setUserPreferences] = useState(initialState);
+function PrivacyForm({ send, context }) {
+  const [userPreferences, setUserPreferences] = useState(context);
 
   const { trayUpdates, otherUpdates } = userPreferences;
 
   function handleSubmit(event) {
     event.preventDefault();
     send('SUBMIT', { payload: userPreferences });
+  }
+
+  function handleBack(event) {
+    event.preventDefault();
+    send('BACK', { payload: userPreferences });
   }
 
   function handleChange(event) {
@@ -49,7 +54,7 @@ function PrivacyForm({ send, initialState }) {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button onClick={() => send('BACK')}>Go Back</button>
+        <button onClick={handleBack}>Go Back</button>
         <button type="submit">Submit</button>
       </div>
     </form>
