@@ -8,6 +8,10 @@ To build the project I used: React, XState (state management), Cypress (testing)
 # Tests
 I implemented E2E testing for the form with Cypress. To start the Cypress testing environment, run `npm run test:cypress`. This command will launch a browser window where you can run the integration.spec.js test suite and let Cypress do its magic. For convenience purposes, I have attached the following GIF that shows the tests running:
 ![cypress-tests](https://github.com/CxGarcia/tray/blob/main/readme-resources/cypress-tests.gif)
+
+## Adding Another Step
+I have implemented another step in the form in the add-step branch to show how minimal is the code required to add another step using this implementation.
+
 # Why XState
 I am a big fan of Redux. However, I have wanted to use XState for a long time, and after some thought, I decided this test was a perfect use case for it, so I used it to implemented state management for the form. 
 ## XState vs. Redux
@@ -54,8 +58,8 @@ const paymentMachine = Machine({
 });
 ```
 
-# Back to The Test
-In the case of the signup form, we have a couple of steps represented as the current state of the machine. Our initial state is the first step of the form, the user form. In XState, we conveniently write out our FSM in object syntax. Here we define The initial state of the machine, all of the possible states, how to transition between states using events, the order in which the states happen, and others such as extended state (also known as context). The code below is the actual machine that I used to build the form. I have added comments in every step to give a clear picture of what is going on.
+# Documentation for the Form Step Machine
+Now that I have explained what an FSM is, we can now move on and document how they are implemented in the assignment. In the case of the signup form, we have a couple of steps represented as the current state of the machine. Our initial state is the first step of the form, the user form. In XState, we conveniently write out our FSM in object syntax. Here we define The initial state of the machine, all of the possible states, how to transition between states using events, the order in which the states happen, and others such as extended state (also known as context). The code below is the actual machine that I used to build the form. I have added comments in every step to give a clear picture of what is going on.
 
 ```js
 const formStepMachine = Machine({
@@ -140,5 +144,3 @@ Another cool feature of XState is the visualizer where we can see our state char
 
 ![form-state-chart](https://github.com/CxGarcia/tray/blob/main/readme-resources/form-state-chart.png)
 
-## Adding Another Step
-To add another step, we would have to refactor our FSM a bit. I have implemented another step in the form in the add-step branch to show how minimal is the code required to add another step using this implementation.
