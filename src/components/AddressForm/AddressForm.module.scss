@@ -1,0 +1,88 @@
+@import 'styles/main.scss';
+
+.form {
+  @include flex(column);
+
+  height: 100%;
+
+  > * {
+    margin: 1rem 0;
+  }
+
+  div {
+    @include flex(column, flex-start);
+  }
+
+  input {
+    width: 380px;
+    height: 40px;
+    padding: 8px 12px;
+
+    margin-top: 0.5rem;
+
+    border-radius: 5px;
+    border: 1px solid $highlights-light;
+    outline: none;
+
+    transition: all 0.25s ease-in;
+
+    &:focus {
+      box-shadow: 0px 0px 0px 2px $hightlights;
+    }
+  }
+
+  .buttonContainer {
+    @include flex(row);
+    width: 50%;
+
+    button {
+      @include form-button;
+      min-width: 50%;
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+.formTitle {
+  @include form-title;
+}
+
+.invalidContainer {
+  position: absolute;
+  right: 25px;
+
+  padding: 1rem;
+  width: 20%;
+
+  border: 1px solid $red;
+  border-radius: 10px;
+
+  animation: grow 0.5s;
+
+  h2 {
+    width: 100%;
+
+    color: $font-color;
+    text-align: center;
+    border-bottom: 1px solid $highlights-light;
+  }
+
+  p {
+    margin: 1.5rem 0;
+    width: 100%;
+
+    color: $font-color;
+    font-weight: 400;
+    line-height: 1.25rem;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

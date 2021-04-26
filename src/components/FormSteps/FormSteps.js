@@ -3,7 +3,7 @@ import styles from './FormSteps.module.scss';
 
 function FormSteps({ value }) {
   function renderSteps() {
-    const steps = ['user', 'privacy'];
+    const steps = ['user', 'address', 'privacy'];
     const idxOfActiveStep = steps.indexOf(value);
 
     return steps.map((step, idx) => {

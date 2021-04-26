@@ -17,6 +17,12 @@ export const formStepMachine = Machine({
       trayUpdates: false,
       otherUpdates: false,
     },
+    address: {
+      address1: '',
+      address2: '',
+      city: '',
+      country: '',
+    },
   },
   //the initial state (step) of our form
   initial: 'user',
@@ -29,9 +35,21 @@ export const formStepMachine = Machine({
       //for example, once the form is submitted, the state machine transitions into the privacy state and so on
       on: {
         SUBMIT: {
-          target: 'privacy',
+          target: 'address',
           //when the form is submitted, it has already been validated
           actions: assign({ user: (_, event) => event.payload }),
+        },
+      },
+    },
+    address: {
+      on: {
+        SUBMIT: {
+          target: 'privacy',
+          actions: assign({ address: (_, event) => event.payload }),
+        },
+        BACK: {
+          target: 'user',
+          actions: assign({ address: (_, event) => event.payload }),
         },
       },
     },
@@ -43,7 +61,7 @@ export const formStepMachine = Machine({
         },
         //another possible event, is if we go back to previous step which is handled by the BACK event
         BACK: {
-          target: 'user',
+          target: 'address',
           actions: assign({ privacy: (_, event) => event.payload }),
         },
       },

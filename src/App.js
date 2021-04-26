@@ -3,6 +3,7 @@ import { useMachine } from '@xstate/react';
 
 import FormSteps from 'components/FormSteps/FormSteps';
 import UserForm from 'components/UserForm/UserForm';
+import AddressForm from 'components/AddressForm/AddressForm';
 import PrivacyForm from 'components/PrivacyForm/PrivacyForm';
 import Loading from 'components/Loading/Loading';
 import Success from 'components/Success/Success';
@@ -13,6 +14,7 @@ import styles from './App.module.scss';
 
 const steps = {
   user: UserForm,
+  address: AddressForm,
   privacy: PrivacyForm,
   loading: Loading,
   success: Success,
