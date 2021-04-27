@@ -30,7 +30,9 @@ export const formStepMachine = Machine({
       on: {
         SUBMIT: {
           target: 'privacy',
-          //when the form is submitted, it has already been validated
+          //when this event happens, we can trigger an action
+          //in this case, we are assigning the event payload to the context, specifically the user
+          //it is worth noting that when the form is submitted, it has already been validated
           actions: assign({ user: (_, event) => event.payload }),
         },
       },

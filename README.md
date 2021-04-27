@@ -1,7 +1,7 @@
 # Running the App
 1. Clone the repo via HTTPS: `git clone https://github.com/CxGarcia/tray.git` or SSH: `git clone git@github.com:CxGarcia/tray.git`
 2. If using npm version below 7, run `npm install` in the local workspace. For npm version 7 run `npm install --legacy-peer-deps`.
-3. Once the dependencies are installed, run `npm start` and the app should be start on port 3000
+3. Once the dependencies are installed, run `npm start`. The app should now be running on port 3000.
 4. Assuming the app is running on port 3000, enter the following URL in the browser to access the app: http://localhost:3000/
 # Tech Stack
 To build the project I used: React, XState (state management), Cypress (testing), and Sass.
@@ -10,7 +10,7 @@ I implemented E2E testing for the form with Cypress. To start the Cypress testin
 ![cypress-tests](https://github.com/CxGarcia/tray/blob/main/readme-resources/cypress-tests.gif)
 
 ## Adding Another Step
-I have implemented another step in the form in the add-step branch to show how minimal is the code required to add another step using this implementation.
+I have implemented another step in the form in the `add-step` branch to show how minimal is the code required to add another step using this implementation. To see the implementation of the additional step, run `git checkout add-step`.
 
 # Why XState
 I am a big fan of Redux. However, I have wanted to use XState for a long time, and after some thought, I decided this test was a perfect use case for it, so I used it to implemented state management for the form. 
@@ -59,11 +59,11 @@ const paymentMachine = Machine({
 ```
 
 # Documentation for the Form Step Machine
-Now that I have explained what an FSM is, we can now move on and document how they are implemented in the assignment. In the case of the signup form, we have a couple of steps represented as the current state of the machine. Our initial state is the first step of the form, the user form. In XState, we conveniently write out our FSM in object syntax. Here we define The initial state of the machine, all of the possible states, how to transition between states using events, the order in which the states happen, and others such as extended state (also known as context). The code below is the actual machine that I used to build the form. I have added comments in every step to give a clear picture of what is going on.
+Now that I have explained what an FSM is, we can move on and document how they are implemented in the assignment. In the case of the signup form, we have a couple of steps represented as the current state of the machine. Our initial state is the first step of the form, the user form. In XState, we conveniently write out our FSM in object syntax. Here we define The initial state of the machine, all of the possible states, how to transition between states using events, the order in which the states happen, and others such as extended state (also known as context). The code below is the actual machine that I used to build the form. I have added comments in every step to give a clear picture of what is going on.
 
 ```js
 const formStepMachine = Machine({
-  //we give out machine a unique identifier so we can reference it when dealing with many machines
+  //we give our machine a unique identifier so we can reference it when dealing with many machines
   id: 'formStepMachine',
   //initial context (extended state) of the machine
   //this are the values received when the form is submitted
@@ -87,11 +87,14 @@ const formStepMachine = Machine({
   states: {
     user: {
       //the on is the event that allows us to transition between states
-      //for example, once the form is submitted, the state machine transitions into the privacy state and so on
+      //for example, once the form is submitted (triggered by the SUBMIT event),
+      //the state machine transitions into the privacy state and so on
       on: {
         SUBMIT: {
           target: 'privacy',
-          //when the form is submitted, it has already been validated
+          //when this event happens, we can trigger an action
+          //in this case, we are assigning the event payload to the context, specifically the user
+          //it is worth noting that when the form is submitted, it has already been validated
           actions: assign({ user: (_, event) => event.payload }),
         },
       },
