@@ -2,7 +2,6 @@
 1. Clone the repo via HTTPS: `git clone https://github.com/CxGarcia/tray.git` or SSH: `git clone git@github.com:CxGarcia/tray.git`
 2. If using npm version below 7, run `npm install` in the local workspace. For npm version 7 run `npm install --legacy-peer-deps`.
 3. Once the dependencies are installed, run `npm start`. The app should now be running on port 3000.
-4. Assuming the app is running on port 3000, enter the following URL in the browser to access the app: http://localhost:3000/
 # Tech Stack
 To build the project I used: React, XState (state management), Cypress (testing), and Sass.
 # Tests
